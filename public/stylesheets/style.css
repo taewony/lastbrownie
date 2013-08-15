@@ -1,0 +1,229 @@
+body {
+  padding: 10px 30px 5px 30px;
+  font: 14px "Lucida Grande", "Helvetica Nueue", Arial, sans-serif;
+  background: #fafafa;
+}
+body #logo {
+  text-decoration: none;
+  color: #000;
+  display: inline-block;
+  height: 56px;
+}
+body #logo h1 {
+  text-shadow: 1px 1px 1px #888;
+  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.2)), to(#000000));
+}
+body #logo h1 img {
+  margin-left: 2px;
+  margin-bottom: -4px;
+  height: 32px;
+  width: 32px;
+  -moz-box-shadow: 1px 1px 1px #888;
+  -webkit-box-shadow: 1px 1px 1px #888;
+  box-shadow: 1px 1px 1px #888;
+}
+#account {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#969696), to(#333333));
+  background-image: -moz-linear-gradient(center bottom, #969696, #333333);
+  border-radius: 0px 0px 8px 8px;
+  -moz-border-radius: 0px 0px 8px 8px;
+  -webkit-border-radius: 0px 0px 8px 8px;
+  position: absolute;
+  top: 0px;
+  right: 50%;
+  margin-right: -120px;
+  padding: 3px 5px;
+  -moz-box-shadow: 0px 3px 3px #888;
+  -webkit-box-shadow: 0px 3px 3px #888;
+  box-shadow: 0px 3px 3px #888;
+}
+#account a {
+  text-decoration: none;
+  color: #AEAEAE;
+  text-shadow: -1px -1px 1px #000000;
+  font-size: 17px;
+  font-weight: bold;
+}
+#account a:hover {
+  color: #fff;
+}
+#main {
+  width: 100%;
+  min-width: 420px;
+  height: 100%;
+}
+#main .bio {
+  position: absolute;
+  display: none;
+  background: #fff;
+  border: 5px solid #eee;
+  -moz-box-shadow: 5px 5px 5px #888;
+  -webkit-box-shadow: 5px 5px 5px #888;
+  box-shadow: 5px 5px 5px #888;
+  padding: 5px;
+  font-size: 11px;
+  width: 400px;
+}
+#main .bio .fullname {
+  font-size: 14px;
+}
+#main .bio img {
+  border-style: none;
+  height: 64px;
+  width: 64px;
+  float: left;
+  margin-right: 0.5em;
+  vertical-align: bottom;
+}
+#main .bio a {
+  display: inline;
+  color: #00f;
+}
+#main .bio span {
+  width: 320px;
+  float: left;
+}
+#main .bio span span {
+  float: none;
+  color: #AEAEAE;
+}
+#sidebar {
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 15%;
+  float: left;
+  margin: 0px;
+  border: none;
+  background: #fff;
+  font-size: 13px;
+}
+#sidebar div {
+  padding: 3px;
+  margin: 0px;
+  border: none;
+}
+#sidebar div a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #000;
+  text-decoration: none;
+}
+#sidebar div:hover {
+  background: #f1f1f1;
+}
+#sidebar img {
+  border-style: none;
+  height: 16px;
+  width: 16px;
+  float: left;
+  margin-right: 0.5em;
+}
+#right {
+  width: 84%;
+  float: left;
+  margin: 0px;
+  -moz-box-shadow: 5px 5px 5px #888;
+  -webkit-box-shadow: 5px 5px 5px #888;
+  box-shadow: 5px 5px 5px #888;
+}
+#chat {
+  overflow: auto;
+  width: auto;
+  border-top: none;
+  border-left: 5px solid #ddd;
+  border-right: 5px solid #ddd;
+  border-bottom: 5px solid #ddd;
+}
+#chat p {
+  padding: 0px;
+  margin: 0px;
+}
+#chat div {
+  padding: 5px;
+  margin: 0px;
+  border-top: 1px solid #eee;
+}
+#chat div .twitpic {
+  position: absolute;
+  display: none;
+  border: 5px solid #eee;
+  -moz-box-shadow: 5px 5px 5px #888;
+  -webkit-box-shadow: 5px 5px 5px #888;
+  box-shadow: 5px 5px 5px #888;
+}
+#chat div:hover {
+  background: #f1f1f1;
+}
+#chat a img.profile {
+  border-style: none;
+  height: 32px;
+  width: 32px;
+  float: left;
+  margin-right: 0.5em;
+  vertical-align: bottom;
+}
+#chat .permalink {
+  font-size: 12px;
+}
+#chat .permalink span {
+  color: #AEAEAE;
+}
+#chat .permalink a {
+  text-decoration: none;
+  color: #AEAEAE;
+}
+#chat .permalink a:hover {
+  color: #f00;
+}
+#form {
+  width: 100%;
+  background: #333;
+  padding: 5px 10px;
+  border-left: 5px solid #ddd;
+  border-top: 5px solid #ddd;
+  border-right: 5px solid #ddd;
+  border-bottom: none;
+  margin-top: -5px;
+  display: table;
+}
+#form #name {
+  width: 64px;
+  padding: 5px;
+  border: 1px solid #eee;
+  background: #eee;
+  display: table-cell;
+}
+#form #text {
+  width: 100%;
+  padding: 5px;
+  background: #fff;
+  border: 1px solid #eee;
+  display: table-cell;
+  white-space: pre-wrap;
+}
+#form #countChar {
+  color: #eee;
+  padding: 5px;
+  display: table-cell;
+}
+#form input[type=submit] {
+  cursor: pointer;
+  background: #999;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  margin-left: 5px;
+  text-shadow: 0 1px 0 #fff;
+  display: table-cell;
+}
+#form input[type=submit]:hover {
+  background: #A2A2A2;
+}
+#form input[type=submit]:active {
+  position: relative;
+  top: 2px;
+}
