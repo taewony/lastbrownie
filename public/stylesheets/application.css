@@ -21,3 +21,7 @@ h1 span { color: blue; }
 .asset {
   padding: 2.5% 0%;
 }
+ div.addthis_toolbox {
+  width:210px;
+  margin: 0 auto;
+ }
