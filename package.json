@@ -5,9 +5,10 @@
   "author": "taewony",
 
   "engines": {
-    "node": "0.8.x"
+    "node": "0.10.x",
+    "npm": "1.2.x"
   },
-
+  
   "dependencies": {
     "connect": "2.7.1",
     "express": "3.0.x",
@@ -20,6 +21,6 @@
   "main": "app.js",
 
   "scripts": {
-    "start": "node app.js"
+    "start": "node web.js"
   }
 }
