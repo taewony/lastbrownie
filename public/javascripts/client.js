@@ -59,7 +59,7 @@ if(!$.fn.ago){
 }
 
 $(function(){
-  var socket = io.connect('http://127.0.0.1:3000');
+  var socket = io.connect(window.location.hostname); // ('http://127.0.0.1:3000');
   var windowObj = $(window),
       documentObj = $(document),
       page = 1,
