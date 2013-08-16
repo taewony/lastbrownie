@@ -64,6 +64,7 @@ app.get('/home', function(req, res){
   res.sendfile(__dirname + '/index.html');
 });
 
+// tweet contest game page
 app.get('/game', function(req, res){
   jadeFile = 'game.jade';
   loginMessage = 'Home';
