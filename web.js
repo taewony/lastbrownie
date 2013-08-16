@@ -50,6 +50,12 @@ var server =  app.listen(app.get('port')) // http.createServer(app)
 var SessionSockets = require('session.socket.io')
   , sessionSockets = new SessionSockets(io, sessionStore, cookieParser);
 
+// https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
+io.configure(function () { 
+  io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 10); 
+});
+  
 // Routes
 app.get('/', function(req, res){
   res.sendfile(__dirname + '/index.html');

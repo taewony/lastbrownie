@@ -14,8 +14,12 @@
     "express": "3.0.x",
     "jade": "0.27.x",
     "less-middleware": "*",
+    "less": ">= 1.1.4",
     "session.socket.io": "0.1.x",
-    "socket.io": "0.9.x"
+    "socket.io": "0.9.x",
+    "connect-redis":">= 1.1.0",
+    "oauth": ">= 0.9.5",
+    "redis": "*"
   },
 
   "main": "app.js",
