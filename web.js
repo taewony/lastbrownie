@@ -168,7 +168,7 @@ sessionSockets.on('connection', function (err, socket, session) {
   console.log('A socket with sessionID '+sessionID+' connected!');
   // setup an inteval that will keep our session fresh
 
-  if("oauth" in session){
+  if(session.oauth != "undefined"){
     session.save(); // ???
     var tw = new Twitter(consumerKey, consumerSecret, session.oauth);
     try{
