@@ -66,18 +66,24 @@ function game(req, res) {
     loginTo = '/login',
     loginMessage = 'Login with Twitter!',
     screenName = 'Anyone';
-  
-  if (req.session && req.session.oauth) {
-    jadeFile = 'game.jade';
-    loginTo = '/logout';
-    loginMessage = 'Home';
-    try{
-      screenName = req.session.oauth._results.screen_name; // undefined error
-      console.log('/game > screanName = ' + screenName);
-    }catch(e){
-      console.error('/game > screen_name ERROR: ' + e);
-      setTimeout(res.redirect, 500, '/');
+
+  if (req.session) {
+    console.log('/game > session = ' + req.session);
+    
+    if (req.session.oauth) {
+      jadeFile = 'game.jade';
+      loginTo = '/logout';
+      loginMessage = 'Home';
+      try{
+        screenName = req.session.oauth._results.screen_name; // undefined error
+        console.log('/game > screanName = ' + screenName);
+      }catch(e){
+        console.error('/game > screen_name ERROR: ' + e);
+        setTimeout(res.redirect, 500, '/');
+      }
     }
+  } else {
+    console.log('/game > no session');
   }
   
   res.render(jadeFile, {
