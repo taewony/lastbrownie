@@ -70,7 +70,7 @@ function game(req, res) {
   if (req.session && req.session.oauth) {
     try{
       screenName = req.session.oauth._results.screen_name; // undefined error
-      console.log("/game > screanName = " + screenName);
+      console.log('/game > screanName = ' + screenName);
     }catch(e){
       console.error('/game > screen_name ERROR: ' + e);
       setTimeout(res.redirect, 500, '/');
@@ -138,9 +138,9 @@ app.get('/authorized', function(req, res, next){
 
 io.set('authorization', function (data, accept){
   if(data.headers.cookie){
-    console.log("/authorization > " + data.headers.cookie);
+    console.log('/authorization > ' + data.headers.cookie);
   } else {
-    console.log("/authorization > No cookie transmitted");
+    console.log('/authorization > No cookie transmitted');
   }
 });
 
@@ -239,7 +239,7 @@ sessionSockets.on('connection', function (err, socket, session) {
       });
     });
   } else {
-    console.log('/connection > No session oauth");
+    console.log('/connection > No session oauth');
   }
 
   socket.on('update', function(message){
