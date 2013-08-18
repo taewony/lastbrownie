@@ -142,7 +142,7 @@ io.set('authorization', function (data, accept){
   } else {
     console.log("/authorization > No cookie transmitted");
   }
-};
+});
 
 io.sockets.tid2clt = {};
 io.sockets.broadcastTo = function(to, message){ //to has to be an Array
