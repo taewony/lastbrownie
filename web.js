@@ -13,7 +13,7 @@ var express = require('express')
   , redis = require('redis')
   , app = express();
   
-var cookieParser = express.cookieParser('your secret sauce')
+var cookieParser = express.cookieParser('your secret')
   , sessionStore = new connect.middleware.session.MemoryStore();
 var consumerKey = 'ACc6vs7VOl39LaGTym4ybw',
     consumerSecret = 'LnC3eUkYCpLXEqJZalKidKHBFQthG7WbmHWT0dTWY';
@@ -70,12 +70,12 @@ app.get('/game', function(req, res){
   loginMessage = 'Home';
   loginTo = '/logout';
   var screenName = 'Anyone';
-  if (req.session.oauth) {
+  if (req.session && req.session.oauth) {
     try{
       screenName = req.session.oauth._results.screen_name; // undefined error
-      console.log("screanName = " + screenName);
+      console.log("/game > screanName = " + screenName);
     }catch(e){
-      console.error('screen_name ERROR: ' + e);
+      console.error('/game > screen_name ERROR: ' + e);
       setTimeout(res.redirect, 500, '/login');
     }
   }
@@ -122,7 +122,7 @@ app.get('/authorized', function(req, res, next){
         });
       }else{
         req.session.oauth = tw;
-        console.log('user_id = ' + tw._results.user_id);
+        console.log('/authorized > user_id = ' + tw._results.user_id);
         res.redirect('/game');
       }
     });
@@ -157,7 +157,7 @@ var count = 0,
 
 sessionSockets.on('connection', function (err, socket, session) {
   count++;
-  console.log('count = '+count);
+  // console.log('/connection > count = '+count);
   socket.json.broadcast.send({count: count});
   socket.json.send({count: count});
   if(count>maxcount){
@@ -165,10 +165,10 @@ sessionSockets.on('connection', function (err, socket, session) {
   }
   
   var sessionID = socket.id;
-  console.log('A socket with sessionID '+sessionID+' connected!');
+  console.log('/connection > A socket with sessionID '+sessionID+' connected!');
   // setup an inteval that will keep our session fresh
 
-  if(session.oauth != "undefined"){
+  if(session && session.oauth){
     session.save(); // ???
     var tw = new Twitter(consumerKey, consumerSecret, session.oauth);
     try{
@@ -261,11 +261,6 @@ sessionSockets.on('connection', function (err, socket, session) {
     scroll(message);
   });
   
-  socket.on('disconnect', function(){
-    count--;
-    socket.json.broadcast.send({count: count});
-  });
-  
   // Based on http://www.danielbaulig.de/socket-ioexpress/
   var intervalID = setInterval(function(){
       // reload the session (just in case something changed,
@@ -280,7 +275,10 @@ sessionSockets.on('connection', function (err, socket, session) {
   }, 60*1000);
   
   socket.on('disconnect', function(){
-    console.log('A socket with sessionID '+sessionID+' disconnected!');
+    count--;
+    socket.json.broadcast.send({count: count});
+  
+    console.log('/disconnect > A socket with sessionID '+sessionID+' disconnected!');
     // clear the socket interval to stop refreshing the session
     clearInterval(intervalID);
   });
