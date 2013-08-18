@@ -62,12 +62,15 @@ function main(req, res) {
 }
 
 function game(req, res) {
-  var jadeFile = 'game.jade',
-    loginMessage = 'Home',
-    loginTo = '/logout',
+  var jadeFile = 'login.jade',
+    loginTo = '/login',
+    loginMessage = 'Login with Twitter!',
     screenName = 'Anyone';
   
   if (req.session && req.session.oauth) {
+    jadeFile = 'game.jade';
+    loginTo = '/logout';
+    loginMessage = 'Home';
     try{
       screenName = req.session.oauth._results.screen_name; // undefined error
       console.log('/game > screanName = ' + screenName);
@@ -139,8 +142,10 @@ app.get('/authorized', function(req, res, next){
 io.set('authorization', function (data, accept){
   if(data.headers.cookie){
     console.log('/authorization > ' + data.headers.cookie);
+    accept(null, true);
   } else {
     console.log('/authorization > No cookie transmitted');
+    accept(null, false);
   }
 });
 
