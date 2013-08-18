@@ -55,28 +55,25 @@ io.configure(function () {
   io.set("transports", ["xhr-polling"]); 
   io.set("polling duration", 10); 
 });
-  
-// Routes
-app.get('/', function(req, res){
-  res.sendfile(__dirname + '/index.html');
-});
-app.get('/home', function(req, res){
-  res.sendfile(__dirname + '/index.html');
-});
 
-// tweet contest game page
-app.get('/game', function(req, res){
-  jadeFile = 'game.jade';
-  loginMessage = 'Home';
-  loginTo = '/logout';
-  var screenName = 'Anyone';
+// Handlers
+function main(req, res) {
+  res.sendfile(__dirname + '/index.html');
+}
+
+function game(req, res) {
+  var jadeFile = 'game.jade',
+    loginMessage = 'Home',
+    loginTo = '/logout',
+    screenName = 'Anyone';
+  
   if (req.session && req.session.oauth) {
     try{
       screenName = req.session.oauth._results.screen_name; // undefined error
       console.log("/game > screanName = " + screenName);
     }catch(e){
       console.error('/game > screen_name ERROR: ' + e);
-      setTimeout(res.redirect, 500, '/login');
+      setTimeout(res.redirect, 500, '/');
     }
   }
   
@@ -86,7 +83,14 @@ app.get('/game', function(req, res){
     loginto: loginTo,
     screen_name: screenName
   });
-});
+}
+
+// Routes Home
+app.get('/', main);
+app.get('/home', main);
+
+// Routes Game
+app.get('/game', game);
 
 app.get('/login', function(req, res){
   var tw = new Twitter(consumerKey, consumerSecret);
@@ -132,6 +136,14 @@ app.get('/authorized', function(req, res, next){
   }
 });
 
+io.set('authorization', function (data, accept){
+  if(data.headers.cookie){
+    console.log("/authorization > " + data.headers.cookie);
+  } else {
+    console.log("/authorization > No cookie transmitted");
+  }
+}
+
 io.sockets.tid2clt = {};
 io.sockets.broadcastTo = function(to, message){ //to has to be an Array
   try{
@@ -169,6 +181,7 @@ sessionSockets.on('connection', function (err, socket, session) {
   // setup an inteval that will keep our session fresh
 
   if(session && session.oauth){
+    console.log('/connection > get user id from session oauth");
     session.save(); // ???
     var tw = new Twitter(consumerKey, consumerSecret, session.oauth);
     try{
@@ -225,6 +238,8 @@ sessionSockets.on('connection', function (err, socket, session) {
         console.log('UserStream ends successfully');
       });
     });
+  } else {
+    console.log('/connection > No session oauth");
   }
 
   socket.on('update', function(message){
